@@ -495,7 +495,7 @@
         if (model) text += `*Model:* ${model}%0A`;
         if (message) text += `*Message:* ${message}%0A`;
         text += `%0A_Submitted via website_`;
-        const whatsappNumber = '919454596729'; // ← Change as needed
+        const whatsappNumber = '+91 70397 14696'; // ← Change as needed
         window.open(`https://wa.me/${whatsappNumber}?text=${text}`, '_blank');
         closeModalFunc();
         inquiryForm.reset();
