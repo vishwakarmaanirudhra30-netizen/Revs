@@ -1,1 +1,1 @@
-this is our test space of projects
+this is our test space for projects
