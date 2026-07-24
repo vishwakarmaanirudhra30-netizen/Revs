@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A5 - Premium Digital Assistant</title>
+    
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="ai.css">
+    
+    <!-- Google Fonts for Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- PDF.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Top Header Area -->
+        <header class="app-header">
+            <div class="brand">
+                <div class="status-dot"></div>
+                <h1>A5 Assistant</h1>
+            </div>
+            <!-- Owner Trainer Button -->
+            <button id="trainerToggleBtn" class="trainer-toggle-btn">Brain Console</button>
+        </header>
+
+        <!-- Main Chat Area -->
+        <main class="chat-container">
+            <div id="chatMessages" class="chat-messages">
+                <!-- Initial Welcome Message -->
+                <div class="message assistant-message">
+                    <div class="message-bubble">
+                        Greetings, Sir/Ma'am. Welcome to A5lyst. How may I assist you today?
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trainer/Admin Panel (Hidden by default) -->
+            <div id="trainerPanel" class="trainer-panel hidden">
+                <div class="trainer-header">
+                    <h3>A5 Intelligence Terminal</h3>
+                    <button id="closeTrainer" class="close-btn">&times;</button>
+                </div>
+                
+                <div class="trainer-body">
+                    <!-- Owner Security Key -->
+                    <input type="password" id="adminKeyInput" placeholder="Enter Administrative Key (Anirudh)..." />
+                    
+                    <!-- 1. Manual Q&A Training Section -->
+                    <div class="train-section">
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 5px;">Manual Data Injection (Q&A):</p>
+                        <input type="text" id="trainQuestionInput" placeholder="User Query (e.g., What are your pricing plans?)" />
+                        <textarea id="trainAnswerInput" placeholder="Formal AI Response (e.g., Sir/Ma'am, our website development starts at...)"></textarea>
+                        <button id="trainSubmitBtn" class="train-btn">Inject Manual Knowledge</button>
+                    </div>
+
+                    <!-- 2. File/PDF Upload Training Section -->
+                    <div class="train-section file-upload-section">
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 5px;">Document Ingestion (PDF / TXT):</p>
+                        <input type="file" id="fileUploadInput" accept=".txt, .pdf" />
+                        <button id="trainFileBtn" class="train-btn file-btn">Process Document</button>
+                    </div>
+
+                    <!-- Status Text for Success/Error -->
+                    <p id="trainerStatus" class="trainer-status"></p>
+                </div>
+
+                <!-- 3. Saved Custom Q&A List (View & Delete) -->
+                <div class="trained-list-container">
+                    <h4>Custom Memory Base</h4>
+                    <div id="trainedList" class="trained-list">
+                        <!-- JavaScript dynamic list yahan add karega -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Chat Input Area -->
+        <footer class="chat-input-area">
+            <div class="input-wrapper">
+                <input type="text" id="userInput" placeholder="How may I assist you today, Sir/Ma'am?" autocomplete="off">
+                <button id="sendBtn" class="send-btn">
+                    <!-- Send Icon (SVG) -->
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Pehle baatchit ka data load hoga -->
+    <script src="talk.js"></script>
+    
+    <!-- Phir main AI engine load hoga -->
+    <script src="ai.js"></script>
+</body>
+</html>
