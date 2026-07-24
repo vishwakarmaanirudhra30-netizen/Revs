@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const trainerStatus = document.getElementById('trainerStatus');
     const trainedList = document.getElementById('trainedList');
 
-    const OWNER_SECRET_KEY = "ani2007";
+    const OWNER_SECRET_KEY = "anirudh_secure_123";
 
     // ---------------------------------------------------------
     // 3. HELPER FUNCTIONS (Randomizer & Regex Matcher)
@@ -252,7 +252,8 @@ async function renderTrainedList() {
     }
 
     // ---------------------------------------------------------
-// 6. CORE AI RESPONSE ENGINE (IndexedDB + External API Fallback)
+// 6. CORE AI RESPONSE ENGINE (IndexedDB Compatible)
+// ---------------------------------------------------------
 async function generateA5Response(userQuery) {
     const cleanQuery = userQuery.toLowerCase().trim();
     const userWords = cleanQuery.split(/\s+/);
@@ -299,18 +300,7 @@ async function generateA5Response(userQuery) {
         return `Sir/Ma'am, based on the documents provided to me:\n\n"${bestDocMatch}"`;
     }
 
-    // --- PRIORITY 4: EXTERNAL AI API FALLBACK ---
-    // Agar local database me kuch nahi mila, toh yahan external AI se jawab mangwayenge
-    try {
-        const externalReply = await fetchExternalAIResponse(userQuery);
-        if (externalReply) {
-            return `Sir/Ma'am, ${externalReply}`;
-        }
-    } catch (error) {
-        console.error("External API Error:", error);
-    }
-
-    // Final Fallback Responses agar API bhi fail ho jaye
+    // Fallback Responses
     const fallbackResponses = [
         "I apologize, Sir/Ma'am, but I do not have specific information regarding your query right now.",
         "I am sorry, Sir/Ma'am, my database does not contain the answer to that yet. Please feel free to ask something else.",
@@ -318,30 +308,6 @@ async function generateA5Response(userQuery) {
     ];
     
     return getRandomResponse(fallbackResponses);
-}
-
-// Helper Function jo external AI API se connect karega
-async function fetchExternalAIResponse(prompt) {
-    const API_KEY = ""; // Jaise Gemini ya OpenAI ki key
-    
-    // Example using Google Gemini API endpoint structure:
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            contents: [{
-                parts: [{ text: `Answer this query professionally, acknowledging the user politely: ${prompt}` }]
-            }]
-        })
-    });
-
-    const data = await response.json();
-    if (data && data.candidates && data.candidates[0].content.parts[0].text) {
-        return data.candidates[0].content.parts[0].text;
-    }
-    return null;
 }
 
     // ---------------------------------------------------------
